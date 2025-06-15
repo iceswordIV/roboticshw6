@@ -2,11 +2,6 @@ clearvars, clc, close all
 
 syms l0 l1 l2 L1 L2 L3 r1 r2 real
 syms theta1 theta2 theta3 theta4 real
-syms Ix1 Iy1 Iz1 real
-syms Ix2 Iy2 Iz2 real
-syms Ix3 Iy3 Iz3 real
-syms Ix4 Iy4 Iz4  real
-
 h1 = 0.3;
 h2 = 0.4;
 h3 = 0.5;
@@ -167,17 +162,17 @@ dthetas = [dtheta1;dtheta2;dtheta3;dtheta4];
 
 
 % Christoffel symbols Γ_{i,j,k}
-% for i = 1:4
-%   for j = 1:4
-%     for k = 1:4
-%       Gamma = 1/2*( ...
-%         diff(M(i,j), thetas(k)) + ...
-%         diff(M(i,k), thetas(j)) - ...
-%         diff(M(j,k), thetas(i)) );
-%       C(i,j) = C(i,j) + Gamma * dthetas(k);
-%     end
-%   end
-% end
+for i = 1:3
+  for j = 1:3
+    for k = 1:3
+      Gamma = 1/2*( ...
+        diff(M(i,j), thetas(k)) + ...
+        diff(M(i,k), thetas(j)) - ...
+        diff(M(j,k), thetas(i)) );
+      C(i,j) = C(i,j) + Gamma * dthetas(k);
+    end
+  end
+end
 
 C = simplify(C);
 
